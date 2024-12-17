@@ -1,4 +1,4 @@
-# Path to Analytics reports
+# Path to Alma Analytics report
 path = '/shared/ZB Solothurn 41SLSP_ZBS/Reports/SLSP_ZBS_reports_on_request/SUPPORT-32972_CUG/'
 
 # Define CUG code
@@ -12,13 +12,18 @@ cug_descriptions = {
     'ZBS_Group-4': 'ZBS MM-Group 26-99'
 }
 
-# Create instances of AnalyticsReport
-report_get_sum = AnalyticsReport(f'{path}SUPPORT-32972_0_99', 'ZBS')
+# Create instances of AnalyticsReport 
+report_get = AnalyticsReport(f'{path}SUPPORT-32972_ANOTHER_ANALYSIS', 'ZBS')
+
+# Extract data
+df = report_get.data
+
+# Clean df
+df.rename(columns={" FLOOR(( CAST ( CURRENT_DATE  AS DATE ) -  CAST (Birth Date AS DATE )) / 365.25)": "Age"}, inplace=True)
+df.drop(columns=[" MAX( RCOUNT(1))"], inplace=True)
 
 
-# Extract data for each instance
-data_get_0_99 = report_get_0_99.data
-
+# modify users
 def update_users(df):
     """
     Update the user group of the users
