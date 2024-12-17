@@ -46,18 +46,19 @@ def update_users(df):
             u = User(primary_id, 'ZBS')
 
             # Define user group based on age
-            if age >= 0 and age <= 12:
+            if age >= 0 and age < 12:
                 u.data['user_group']['value'] = labels[0]
                 u.data['user_group']['desc'] = cug_descriptions[labels[0]]
-            elif age > 12 and age <= 15:
+            elif age >= 12 and age < 15:
                 u.data['user_group']['value'] = labels[1]
                 u.data['user_group']['desc'] = cug_descriptions[labels[1]]
-            elif age > 15 and age <= 26:
+            elif age >= 15 and age < 26:
                 u.data['user_group']['value'] = labels[2]
                 u.data['user_group']['desc'] = cug_descriptions[labels[2]]
-            elif age > 26 and age <= 99:
+            elif age >= 26 and age < 99:
                 u.data['user_group']['value'] = labels[3]
                 u.data['user_group']['desc'] = cug_descriptions[labels[3]]
+                
 
             # Update user, override is required to update user group if there is already a user group change on the account
             u.update(override=['user_group'])
