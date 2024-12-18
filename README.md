@@ -3,3 +3,6 @@ This script takes false age-CUGs of ZBS through an Alma analytics report and dis
 
 * Author: Rouven Schabinger (rouven.schabinger@slsp.ch)
 * Date: 2024-12-16
+
+## Requirements
+sendmail needs to be set up locally
