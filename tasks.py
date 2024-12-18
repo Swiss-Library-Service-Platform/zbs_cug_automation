@@ -38,7 +38,7 @@ labels = ['ZBS_Group-1', 'ZBS_Group-2', 'ZBS_Group-3', 'ZBS_Group-4']
 
 
 # Create instances of AnalyticsReport 
-report_get = AnalyticsReport(f'{path}SUPPORT-32972_ANOTHER_ANALYSIS_1', 'ZBS')
+report_get = AnalyticsReport(f'{path}SUPPORT-32972_ANOTHER_ANALYSIS', 'ZBS')
 
 # Extract data
 df = report_get.data
