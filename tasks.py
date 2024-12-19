@@ -28,7 +28,7 @@ from datetime import datetime, timedelta
 from sendmail import sendmail
 
 # Config logs
-config_log()
+config_log("log_zbs_cug_automation")
 
 # Path to Alma Analytics report
 path = '/shared/ZB Solothurn 41SLSP_ZBS/Reports/SLSP_ZBS_reports_on_request/SUPPORT-32972_CUG/'
@@ -93,7 +93,7 @@ current_date = datetime.now().strftime('%Y-%m-%d')
 count = 0
 
 # Open the log file and read line by line
-with open('log/log.txt', 'r') as file:
+with open('log/log_zbs_cug_automation.txt', 'r') as file:
     for line in file:
         # Check if the line contains the current date and "user updated"
         if current_date in line and "user updated" in line:
