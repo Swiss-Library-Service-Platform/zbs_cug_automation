@@ -1,5 +1,5 @@
 """
-ZBS CUG Automation
+ZBS CUG (Customized User Groups) Automation
 
 Description:
 This script takes false age-CUGs of ZBS through an Alma analytics report and distributes them correctly to the users.
@@ -24,11 +24,12 @@ from almapiwrapper import ApiKeys
 
 import pandas as pd
 from datetime import datetime, timedelta
-
+import os
 from sendmail import sendmail
 
-# Config logs
-config_log("log_zbs_cug_automation")
+# Define log path and configure logging
+LOG_PATH = os.path.join("log", "log_zbs_cug_automation.txt")
+config_log(LOG_PATH)
 
 # Path to Alma Analytics report
 path = '/shared/ZB Solothurn 41SLSP_ZBS/Reports/SLSP_ZBS_reports_on_request/SUPPORT-32972_CUG/'
@@ -92,19 +93,23 @@ current_date = datetime.now().strftime('%Y-%m-%d')
 # Initialize a counter
 count = 0
 
-# Open the log file and read line by line
-with open('log/log_zbs_cug_automation.txt', 'r') as file:
-    for line in file:
-        # Check if the line contains the current date and "user updated"
-        if current_date in line and "user updated" in line:
-            count += 1
+# Open the log file and read line by line if it exists
+if os.path.exists(LOG_PATH):
+    with open(LOG_PATH, 'r', encoding='utf-8') as file:
+        for line in file:
+            # Check if the line contains the current date and "user updated"
+            if current_date in line and "user updated" in line:
+                count += 1
+else:
+    print(f"Log file not found: {LOG_PATH}")
 
 # Prepare the email content
 subject = f"CUG Updated Report for {current_date}"
 message = f"Number of CUG Updated messages for {current_date}: {count}"
 
 # List of report receivers
-report_receivers = ["rouven.schabinger@slsp.ch"]
+
+report_receivers = [ "rouven.schabinger@slsp.ch"]
 
 # Send the email to each receiver
 for report_receiver in report_receivers:
