@@ -1,0 +1,7 @@
+log
+nohup.out
+env
+.venv
+.idea
+__pycache__
+.env

@@ -25,7 +25,9 @@ from almapiwrapper import ApiKeys
 import pandas as pd
 from datetime import datetime, timedelta
 import os
-from sendmail import sendmail
+from datetime import date
+from pymongo import MongoClient
+# from sendmail import sendmail
 
 # Define log path and configure logging
 LOG_PATH = os.path.join("log", "log_zbs_cug_automation.txt")
@@ -103,15 +105,28 @@ if os.path.exists(LOG_PATH):
 else:
     print(f"Log file not found: {LOG_PATH}")
 
-# Prepare the email content
-subject = f"CUG Updated Report for {current_date}"
-message = f"Number of CUG Updated messages for {current_date}: {count}"
+# Add report to MongoDB
+client = MongoClient(os.getenv('MONGODB_URI'))
+db = client['automated_processes']
+collection = db['zbs_cug']
 
-# List of report receivers
+row = {'DATE': date.today().isoformat(),
+       'SUCCESS': count}
 
-report_receivers = [ "rouven.schabinger@slsp.ch"]
+if collection.count_documents({'DATE': row['date']}) == 0:
+    collection.insert_one(row)
 
-# Send the email to each receiver
-for report_receiver in report_receivers:
-    sendmail(report_receiver, subject, message)
+client.close()
+
+# # Prepare the email content
+# subject = f"CUG Updated Report for {current_date}"
+# message = f"Number of CUG Updated messages for {current_date}: {count}"
+#
+# # List of report receivers
+#
+# report_receivers = [ "rouven.schabinger@slsp.ch"]
+#
+# # Send the email to each receiver
+# for report_receiver in report_receivers:
+#     sendmail(report_receiver, subject, message)
     
