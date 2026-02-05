@@ -20,6 +20,8 @@ from almapiwrapper.analytics import AnalyticsReport
 from almapiwrapper.acquisitions import POLine, Vendor, Invoice, fetch_invoices
 from almapiwrapper.configlog import config_log
 from almapiwrapper import ApiKeys
+import dotenv
+dotenv.load_dotenv()
 
 
 import pandas as pd

@@ -1,3 +1,4 @@
 almapiwrapper
 pandas
 pymongo
+python-dotenv
