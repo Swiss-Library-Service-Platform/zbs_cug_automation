@@ -114,10 +114,10 @@ db = client['automated_processes']
 collection = db['zbs_cug']
 
 row = {'DATE': date.today().isoformat(),
-       'SUCCESS': count}
+       'SUCCESS': count,
+       'TIMESTAMP': datetime.now()}
 
-if collection.count_documents({'DATE': row['DATE']}) == 0:
-    collection.insert_one(row)
+collection.insert_one(row)
 
 client.close()
 
