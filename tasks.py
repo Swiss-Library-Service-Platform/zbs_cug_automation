@@ -20,9 +20,10 @@ from almapiwrapper.analytics import AnalyticsReport
 from almapiwrapper.acquisitions import POLine, Vendor, Invoice, fetch_invoices
 from almapiwrapper.configlog import config_log
 from almapiwrapper import ApiKeys
-import dotenv
-dotenv.load_dotenv()
+from dotenv import load_dotenv
 
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 import pandas as pd
 from datetime import datetime, timedelta
