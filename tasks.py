@@ -115,7 +115,7 @@ collection = db['zbs_cug']
 row = {'DATE': date.today().isoformat(),
        'SUCCESS': count}
 
-if collection.count_documents({'DATE': row['date']}) == 0:
+if collection.count_documents({'DATE': row['DATE']}) == 0:
     collection.insert_one(row)
 
 client.close()
