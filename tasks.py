@@ -33,7 +33,7 @@ from pymongo import MongoClient
 # from sendmail import sendmail
 
 # Define log path and configure logging
-LOG_PATH = os.path.join("log", "log_zbs_cug_automation.txt") # os.path.join("log", "log_zbs_cug_automation.txt")
+LOG_PATH = os.path.join("log", "zbs_cug_automation.txt") # os.path.join("log", "log_zbs_cug_automation.txt")
 config_log('zbs_cug_automation')
 
 # Path to Alma Analytics report
